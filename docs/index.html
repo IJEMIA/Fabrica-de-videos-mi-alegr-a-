@@ -79,7 +79,7 @@
 
     <label for="proveedor">Proveedor de IA</label>
     <select id="proveedor">
-      <option value="groq">Groq — rápido y gratuito (modelos Llama)</option>
+      <option value="groq">Groq — rápido y gratuito (modelos GPT-OSS)</option>
       <option value="gemini">Gemini — de Google (modelos Gemini Flash)</option>
     </select>
 
@@ -1550,16 +1550,35 @@ function extraerJSON(texto){
   if (ini >= 0 && fin > ini) t = t.slice(ini, fin + 1);
   return JSON.parse(t);
 }
+async function llamarGroq(prompt, modelo){
+  const r = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: "Bearer " + clave },
+    body: JSON.stringify({ model: modelo, messages: [{ role: "user", content: prompt }], temperature: 0.7, max_tokens: 6000 })
+  });
+  if (!r.ok){
+    let detalle = "";
+    try {
+      const j = await r.json();
+      detalle = (j.error && j.error.message) ? j.error.message : (j.message || "");
+    } catch (e){}
+    const err = new Error("Groq devolvió " + r.status + (detalle ? ": " + detalle : ""));
+    err.status = r.status;
+    throw err;
+  }
+  const j = await r.json();
+  return extraerJSON(j.choices[0].message.content);
+}
 async function llamarIA(prompt){
   if (proveedor === "groq"){
-    const r = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: "Bearer " + clave },
-      body: JSON.stringify({ model: "llama-3.3-70b-versatile", messages: [{ role: "user", content: prompt }], temperature: 0.7, max_tokens: 6000 })
-    });
-    if (!r.ok) throw new Error("Groq devolvió " + r.status);
-    const j = await r.json();
-    return extraerJSON(j.choices[0].message.content);
+    try {
+      return await llamarGroq(prompt, "openai/gpt-oss-120b");
+    } catch (e){
+      // Si el modelo no existe o no está disponible para esta clave (404/400),
+      // reintenta UNA vez con el modelo pequeño de la misma familia.
+      if (e.status === 404 || e.status === 400) return await llamarGroq(prompt, "openai/gpt-oss-20b");
+      throw e;
+    }
   }
   const r = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + encodeURIComponent(clave), {
     method: "POST",

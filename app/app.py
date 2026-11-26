@@ -4,7 +4,7 @@
 Flujo:
   1. El usuario pega su clave de Groq (o la guarda en .env) y escribe el
      tema y el contenido del video.
-  2. Groq (Llama 3.3 70B) genera el spec JSON del video siguiendo el esquema
+  2. Groq (GPT-OSS 120B) genera el spec JSON del video siguiendo el esquema
      exacto del framework y el catálogo de recursos disponibles.
   3. El spec se muestra para revisarlo/editarlo y se renderiza con el
      framework (PIL + ffmpeg), con narración gratuita de edge-tts

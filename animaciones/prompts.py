@@ -9,7 +9,7 @@ El catálogo viene de animaciones/catalogo.py (nunca se duplica aquí).
 """
 from .catalogo import catalogo_para_groq
 
-MODELO_GROQ = "llama-3.3-70b-versatile"
+MODELO_GROQ = "openai/gpt-oss-120b"
 ENLACE_CLAVE = "https://console.groq.com/keys"
 
 ESQUEMA = """ESQUEMA EXACTO DEL SPEC (JSON, sin markdown ni explicaciones):

@@ -42,7 +42,7 @@ pantalla de la app (tipo contraseña), que la guarda en el localStorage de
 tu navegador. Hay un botón **«Probar clave y continuar»** que la valida
 con una llamada pequeña a la API.
 
-- **Groq** (rápido y gratuito, modelos Llama): consíguela en
+- **Groq** (rápido y gratuito, modelos GPT-OSS): consíguela en
   https://console.groq.com/keys — crea una cuenta, entra a **API Keys**
   y copia la clave (empieza por `gsk_`).
 - **Gemini** (Google, modelos Gemini Flash): consíguela en
