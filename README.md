@@ -6,9 +6,73 @@ con narración. Un solo renderizador lee un archivo `spec.json` por video
 y produce el mp4: cada video nuevo es escribir un spec pequeño, no
 reescribir el código de dibujo.
 
-Además incluye una **app web** (Gradio) con IA de Groq: escribes el tema y
-el contenido, Groq escribe el guion, y la app renderiza y te deja
-**descargar el video**.
+El producto principal es la **app web estática en `docs/`**, publicada
+con GitHub Pages: escribes el tema y el contenido, la IA (Groq o Gemini,
+con TU propia clave) escribe el guion, y el video se dibuja y se descarga
+**en el navegador**, sin servidores, sin instalar nada.
+
+## Entrar a la app (producto principal)
+
+**https://ijemia.github.io/Fabrica-de-videos-mi-alegr-a-/**
+
+El flujo es como el de PsicologIA:
+
+1. **Conecta tu clave** — la primera pantalla pide tu propia clave de
+   Groq o de Gemini. La clave se guarda **solo en tu dispositivo**
+   (localStorage del navegador) y nunca se envía a ningún servidor del
+   sitio: solo a la API del proveedor que elijas. También puedes entrar
+   sin clave y escribir el guion a mano.
+2. **Escribe el tema y el contenido** (misión, visión, datos o hechos),
+   elige **estilo** y **duración**.
+3. **Genera el guion con IA** — Groq o Gemini escribe el spec con el
+   catálogo de abajo.
+4. **Revisa y edita las escenas** en el editor (rótulo, narración,
+   escenario, sprite; y el JSON completo si quieres afinar).
+5. **Vista previa** con la voz de tu dispositivo y música generada.
+6. **Descarga el video** (WebM/MP4), la portada PNG o copia el guion.
+
+Para activar la página: en el repo, **Settings → Pages → Deploy from a
+branch → main → /docs** (solo se hace una vez).
+
+### Tu clave de Groq o Gemini
+
+La clave es gratis y **nunca se sube al repositorio** (el repo es público
+y una clave ahí la robaría cualquiera). Va solo en el campo de la primera
+pantalla de la app (tipo contraseña), que la guarda en el localStorage de
+tu navegador. Hay un botón **«Probar clave y continuar»** que la valida
+con una llamada pequeña a la API.
+
+- **Groq** (rápido y gratuito, modelos Llama): consíguela en
+  https://console.groq.com/keys — crea una cuenta, entra a **API Keys**
+  y copia la clave (empieza por `gsk_`).
+- **Gemini** (Google, modelos Gemini Flash): consíguela en
+  https://aistudio.google.com/apikey.
+
+### Limitación honesta de la app web
+
+**El video exportado NO incluye la voz:** el navegador no puede capturar
+la voz del dispositivo (speechSynthesis) dentro de la grabación. El video
+sí lleva la música generada, y la vista previa sí suena con la voz de tu
+dispositivo. Copia el guion con el botón **«Copiar guion»** y graba la
+narración en TikTok o CapCut. (Es la misma limitación de las herramientas
+«Generador de videos educativos» y «Generador de videos estilo Aprendiz
+Financiero».)
+
+Detalle técnico: en la app web los estilos SNES/NES usan los mismos
+sprites pixel art del framework, escalados con vecino más cercano; no hay
+lienzo interno de 180×320 como en el render Python, así que el aspecto es
+pixel art pero la resolución interna es 720×1280.
+
+## La app local (Gradio) y el render por línea de comandos
+
+El framework Python sigue en el repo como referencia y utilidad local.
+La app Gradio corre en tu computadora:
+
+- Después de `python app.py`, abre **http://localhost:7860**.
+- En la app pones tu clave de Groq (campo "Tu clave de Groq" tipo
+  contraseña + botón "Guardar clave en .env", solo en tu computadora),
+  o en un archivo `.env` (copia `.env.example` a `.env` y pega tu clave
+  en `GROQ_API_KEY=...`; `.env` está en `.gitignore`).
 
 ## ¿Por qué cuesta menos tokens?
 
@@ -21,36 +85,9 @@ cada video nuevo es solo:
 3. renderizar: `python3 render.py videos/<slug>/spec.json`.
 
 El ahorro está en no reescribir personajes, ilustraciones, escenas,
-mezcla de audio ni codificación de video en cada video.
-
-## Entrar a la app
-
-La app es una página web que corre en tu computadora (o en Hugging Face
-Spaces, ver abajo). Para entrar:
-
-- **En tu computadora:** después de `python app.py`, abre
-  **http://localhost:7860** en tu navegador. La propia app también muestra
-  su dirección arriba.
-- **En Hugging Face Spaces:** la dirección es la del Space que publiques
-  (ver "Publicar en Hugging Face Spaces").
-
-En la app pones tu clave de Groq (ver "Tu clave de Groq"), el tema y el
-contenido, eliges estilo y duración, pulsas **Generar video**, y al final
-descargas el mp4 con el botón **⬇️ Descargar el video (mp4)**.
-
-### Tu clave de Groq
-
-La clave es gratis y **nunca se sube al repositorio** (el repo es público
-y una clave ahí la robaría cualquiera). Dos formas de ponerla:
-
-1. **En la app:** campo "Tu clave de Groq" (tipo contraseña) + botón
-   "Guardar clave en .env". La app la guarda solo en tu computadora.
-   Enlace visible en la app: [Obtener tu clave gratis](https://console.groq.com/keys).
-2. **En un archivo `.env`:** copia `.env.example` a `.env` y pega tu clave
-   en `GROQ_API_KEY=...`. `.env` está en `.gitignore`.
-
-Para conseguirla: crea una cuenta en https://console.groq.com/keys, entra
-a **API Keys** y copia la clave (empieza por `gsk_`).
+mezcla de audio ni codificación de video en cada video. La app web de
+`docs/` lleva ese mismo catálogo en JavaScript, así que el guion que
+genera la IA usa los mismos recursos.
 
 ## Instalación
 
@@ -286,20 +323,24 @@ desde su spec reutilizando sus audios, el mp4 salió de **60.27 s frente a
 
 ## Limitaciones honestas
 
-- **GitHub Pages (sitio estático) NO puede renderizar videos.** La app
-  necesita un backend (Python + ffmpeg). Corre en tu computadora o en un
-  hosting con backend: Render, Railway o Hugging Face Spaces.
-- La narración de la app usa **edge-tts** (gratuito, sin clave). Si en tu
-  red no llega a Microsoft, la app puede renderizar sin voz
+- **La app web exporta el video sin voz** (ver arriba): el navegador no
+  puede capturar la voz del dispositivo; la vista previa sí suena, el
+  video lleva música, y el guion se copia para grabarlo en TikTok o
+  CapCut.
+- La narración de la app local usa **edge-tts** (gratuito, sin clave). Si
+  en tu red no llega a Microsoft, la app puede renderizar sin voz
   (`FABRICA_TTS_BACKEND=ninguno`) y el guion se graba en TikTok o CapCut.
 - La narración se verifica por duraciones y energía de voz, no escuchando
   palabra por palabra.
 - Groq genera el guion a partir de tus datos: **revisa el spec antes de
   renderizar**; la app lo muestra para editarlo.
+- El render en el navegador es en tiempo real: un video de 3 minutos
+  tarda 3 minutos en exportarse.
 
-## Publicar en Hugging Face Spaces (enlace público)
+## Publicar la app local en Hugging Face Spaces (opcional)
 
-Sin desplegar nada desde aquí; dos pasos cuando lo decidas:
+Sin desplegar nada desde aquí; dos pasos cuando lo decidas (solo para la
+app Gradio; la app principal ya es la página de GitHub Pages de arriba):
 
 1. Crea un Space en https://huggingface.co/new-space (SDK: Gradio) y
    sube el contenido del repo (el `app.py` de la raíz es el punto de
@@ -308,14 +349,16 @@ Sin desplegar nada desde aquí; dos pasos cuando lo decidas:
 2. En el Space, ve a **Settings → Repository secrets** y pega tu clave
    como Secret con el nombre `GROQ_API_KEY`.
 
-El enlace del Space es entonces la dirección pública de la app.
+El enlace del Space es entonces la dirección pública de la app Gradio.
 
 ## Estructura
 
 ```
+docs/index.html           App web estática (producto principal, GitHub Pages)
 render.py                 Renderizador por línea de comandos
-app.py                    Lanzador de la app web (http://localhost:7860)
+app.py                    Lanzador de la app Gradio (http://localhost:7860)
 app/app.py                Interfaz Gradio + llamada a Groq + descarga
+scripts/generar_spec.py   Genera un spec con Groq desde la terminal
 animaciones/
   core.py                 Lienzo, fuentes, texto, mezcla
   estilos.py              Estilos aprendiz / alebrigma / snes / nes
@@ -324,6 +367,7 @@ animaciones/
   objetos.py              Objetos de los videos originales (lámpara, etc.)
   escenarios.py           18 escenarios con parallax
   catalogo.py             Catálogo para Groq y para este README
+  prompts.py              Prompt y esquema del spec (compartido con la app web)
   spec.py                 Esquema y validación del spec.json
   audio.py                TTS (edge-tts / comando / ninguno) + música
 videos/<slug>/            4 videos de ejemplo (spec.json + guion.txt)

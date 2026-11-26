@@ -1,5 +1,7 @@
 # La clave de Groq y cualquier secreto local: NUNCA se suben al repo.
 .env
+# Certificado local de Gradio (se genera al correr la app local).
+.gradio/
 # Archivos generados por la app y por los renders.
 salidas/
 .trabajo-*/
