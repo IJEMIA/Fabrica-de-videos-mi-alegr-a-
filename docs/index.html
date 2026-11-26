@@ -51,8 +51,11 @@
   #lienzo{width:100%;max-width:360px;display:block;margin:0 auto;border-radius:12px;border:1px solid var(--borde);background:#fff}
   .controles{display:flex;gap:8px;margin-top:10px}
   .controles .boton{margin-top:0}
-  #barra{height:8px;background:#e5e5e5;border-radius:4px;margin-top:10px;overflow:hidden}
-  #barra>div{height:100%;width:0%;background:var(--morado)}
+  #barra,#barra-rapido{height:8px;background:#e5e5e5;border-radius:4px;margin-top:10px;overflow:hidden}
+  #barra>div,#barra-rapido>div{height:100%;width:0%;background:var(--morado)}
+  #video-rapido{width:100%;max-width:360px;display:block;margin:12px auto;border-radius:12px;background:#000}
+  #info-rapido{text-align:center;font-size:13px;color:var(--gris);margin-top:6px}
+  .version{font-size:12px;color:var(--gris);text-align:center;margin-top:4px}
   #info-escena{text-align:center;font-size:13px;color:var(--gris);margin-top:6px}
   .clave-ok{font-size:13px;background:var(--mint);border-radius:8px;padding:6px 10px;display:inline-block}
   .enlace{color:var(--morado);font-weight:700}
@@ -67,6 +70,7 @@
 <header>
   <h1 class="mano">🎬 Fábrica de videos Mi Alegría</h1>
   <p>Videos educativos verticales, dibujados por código, sin salir de GitHub</p>
+  <p class="version">v2 · Groq gpt-oss-120b</p>
 </header>
 <main>
 
@@ -96,9 +100,65 @@
 
   <!-- ============ PANTALLA 2: LA FÁBRICA ============ -->
   <section id="pantalla-app" class="oculto">
-    <div class="tarjeta">
+
+    <!-- MODO RÁPIDO: un prompt -> video terminado -->
+    <div class="tarjeta" id="tarjeta-rapido">
       <span class="clave-ok" id="clave-estado">✓ Clave guardada</span>
       <button class="boton secundario" id="btn-cambiar-clave" style="margin-top:10px">Cambiar clave / proveedor</button>
+
+      <h2 class="mano" style="margin-top:14px">⚡ Crea tu video</h2>
+      <p class="nota">Escribe una frase y recibe tu video terminado. Sin editor, sin pasos extra.</p>
+
+      <label for="prompt-rapido">Describe tu video en una frase…</label>
+      <textarea id="prompt-rapido" placeholder="Ej.: Un video sobre Iluminando tu futuro: poner 50 lámparas ahorradoras y 4 vigilantes en Tlatelolco para que el barrio sea más seguro."></textarea>
+
+      <div class="fila">
+        <div>
+          <label for="estilo-rapido">Estilo</label>
+          <select id="estilo-rapido">
+            <option value="aprendiz" selected>Aprendiz — cartoon 2D, fondo blanco</option>
+            <option value="alebrigma">Alebrigma — formas suaves, fondo morado</option>
+            <option value="snes">SNES — pixel art 16 bits</option>
+            <option value="nes">NES — pixel art 8 bits</option>
+          </select>
+        </div>
+        <div>
+          <label for="duracion-rapido">Duración</label>
+          <select id="duracion-rapido">
+            <option value="30">30 segundos</option>
+            <option value="60" selected>1 minuto</option>
+            <option value="90">1 minuto y medio</option>
+            <option value="120">2 minutos</option>
+            <option value="180">3 minutos</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="boton" id="btn-rapido">🎬 Crear mi video</button>
+      <p class="estado" id="estado-rapido"></p>
+      <div id="progreso-rapido" class="oculto">
+        <div id="barra-rapido"><div></div></div>
+        <p id="info-rapido">Creando tu video…</p>
+      </div>
+      <div id="resultado-rapido" class="oculto">
+        <video id="video-rapido" controls playsinline preload="metadata"></video>
+        <a id="btn-descargar-rapido" class="boton verde" href="#" download>⬇ Descargar video</a>
+        <div id="zona-rapido"></div>
+        <div class="controles">
+          <button class="boton secundario" id="btn-portada-rapido">🖼 Portada PNG</button>
+          <button class="boton secundario" id="btn-guion-rapido">📋 Copiar guion</button>
+        </div>
+        <p class="aviso">⚠️ <b>El video exportado NO incluye la voz:</b> el navegador no
+        puede capturar la voz del dispositivo. El video sí lleva la música.
+        Copia el guion y grábalo en TikTok o CapCut.</p>
+      </div>
+      <button class="boton secundario" id="btn-avanzado">🛠 Modo avanzado (editar escenas antes de exportar)</button>
+    </div>
+
+    <!-- MODO AVANZADO: formulario + editor + vista previa + descarga -->
+    <div id="modo-avanzado" class="oculto">
+    <div class="tarjeta">
+      <button class="boton secundario" id="btn-volver-rapido">← Volver al modo rápido</button>
 
       <h2 class="mano" style="margin-top:14px">📝 Tu video</h2>
       <label for="tema">Tema</label>
@@ -188,6 +248,7 @@
         MediaRecorder. Tu clave solo va a la API del proveedor que elegiste.
         Nada se sube a ningún servidor de este sitio.</p>
       </details>
+    </div>
     </div>
   </section>
 </main>
@@ -1614,6 +1675,69 @@ async function generarGuion(){
   } finally { $("btn-generar").disabled = false; }
 }
 
+/* ---------- modo rápido: prompt -> video terminado ---------- */
+function setProgresoRapido(pct, texto){
+  $("progreso-rapido").classList.remove("oculto");
+  $("barra-rapido").firstElementChild.style.width = Math.max(0, Math.min(100, pct)) + "%";
+  $("info-rapido").textContent = texto;
+}
+async function crearVideoRapido(){
+  const est = $("estado-rapido");
+  const prompt = $("prompt-rapido").value.trim();
+  if (sinClave || !clave){
+    est.textContent = "Para crear el video con IA necesitas una clave. Vuelve a la pantalla de clave y conéctala.";
+    est.className = "estado error"; return;
+  }
+  if (!prompt){
+    est.textContent = "Describe tu video en una frase primero.";
+    est.className = "estado error"; return;
+  }
+  // El prompt es el tema y el contenido: se reutiliza el constructor existente.
+  $("estilo").value = $("estilo-rapido").value;
+  $("duracion").value = $("duracion-rapido").value;
+  $("tema").value = prompt;
+  $("contenido").value = prompt;
+  $("btn-rapido").disabled = true;
+  $("resultado-rapido").classList.add("oculto");
+  $("zona-rapido").innerHTML = "";
+  const vid = $("video-rapido");
+  vid.removeAttribute("src"); vid.load();
+  est.textContent = ""; est.className = "estado";
+  try {
+    setProgresoRapido(5, "La IA está escribiendo tu guion…");
+    const s = await llamarIA(construirPrompt());
+    if (!s.escenas || !s.escenas.length) throw new Error("La IA no devolvió escenas.");
+    s.estilo = $("estilo").value;
+    s.velocidad = s.estilo === "aprendiz" ? 0.95 : 1.0;
+    cargarSpec(s);
+    setProgresoRapido(25, "Guion listo: " + s.escenas.length + " escenas. Creando tu video…");
+    const res = await exportarVideo({
+      estadoEl: est,
+      sinEnlace: true,
+      onProgreso: pct => {
+        const total = 25 + Math.round(pct * 0.75);
+        setProgresoRapido(total, "Creando tu video… " + total + " %");
+      }
+    });
+    if (!res) return; // el error ya se mostró en estado-rapido
+    setProgresoRapido(100, "¡Tu video está listo!");
+    vid.src = res.url;
+    const dl = $("btn-descargar-rapido");
+    dl.href = res.url;
+    dl.setAttribute("download", res.nombre + "." + res.ext);
+    dl.textContent = "⬇ Descargar video (" + res.mb + " MB)";
+    $("progreso-rapido").classList.add("oculto");
+    $("resultado-rapido").classList.remove("oculto");
+    est.textContent = "✓ Tu video está listo. Recuerda: no lleva voz, solo música. Copia el guion y grábalo en TikTok o CapCut.";
+    est.className = "estado ok";
+    $("resultado-rapido").scrollIntoView({ behavior: "smooth", block: "start" });
+  } catch (e){
+    est.textContent = "No se pudo crear el video: " + e.message + ". Revisa tu clave o inténtalo de nuevo.";
+    est.className = "estado error";
+    $("progreso-rapido").classList.add("oculto");
+  } finally { $("btn-rapido").disabled = false; }
+}
+
 /* ---------- spec y duraciones ---------- */
 function cargarSpec(s){
   spec = s;
@@ -1788,11 +1912,13 @@ function reiniciarVista(){
 }
 
 /* ---------- exportación ---------- */
-async function exportarVideo(){
-  const est = $("estado-exp");
-  if (!spec || !spec.escenas.length){ est.textContent = "Primero genera el guion o carga el ejemplo."; est.className = "estado error"; return; }
+async function exportarVideo(opts){
+  opts = opts || {};
+  const est = opts.estadoEl || $("estado-exp");
+  const zona = opts.zonaEl || $("zona-descarga");
+  if (!spec || !spec.escenas.length){ est.textContent = "Primero genera el guion o carga el ejemplo."; est.className = "estado error"; return null; }
   $("btn-exportar").disabled = true;
-  est.textContent = "Preparando exportación…"; est.className = "estado";
+  if (!opts.onProgreso){ est.textContent = "Preparando exportación…"; est.className = "estado"; }
   try {
     const off = document.createElement("canvas"); off.width = W; off.height = H;
     const oc = off.getContext("2d");
@@ -1817,7 +1943,9 @@ async function exportarVideo(){
         const t = (ahora - t0) / 1000;
         const i = indiceEscena(Math.min(t, total - 0.01));
         renderEscena(oc, spec.estilo, spec.escenas[i], Math.max(0, t - inicioEscena(i)), duraciones[i]);
-        est.textContent = "Grabando… " + Math.min(100, Math.round(100 * t / total)) + "% (el video se graba en tiempo real)";
+        const pct = Math.min(100, Math.round(100 * t / total));
+        if (opts.onProgreso) opts.onProgreso(pct);
+        else est.textContent = "Grabando… " + pct + "% (el video se graba en tiempo real)";
         if (t < total) requestAnimationFrame(paso); else res();
       }
       requestAnimationFrame(paso);
@@ -1829,21 +1957,24 @@ async function exportarVideo(){
     const url = URL.createObjectURL(blob);
     const ext = mime.indexOf("mp4") >= 0 ? "mp4" : "webm";
     const nombre = (spec.titulo || "video").toLowerCase().replace(/[^a-z0-9áéíóúñ]+/gi, "-").replace(/^-+|-+$/g, "") || "video";
-    const zona = $("zona-descarga");
-    zona.innerHTML = "";
-    const a = document.createElement("a");
-    a.href = url; a.download = nombre + "." + ext; a.className = "boton";
-    a.textContent = "⬇ Descargar " + nombre + "." + ext + " (" + (blob.size / 1048576).toFixed(1) + " MB)";
-    zona.appendChild(a);
+    if (!opts.sinEnlace){
+      zona.innerHTML = "";
+      const a = document.createElement("a");
+      a.href = url; a.download = nombre + "." + ext; a.className = "boton";
+      a.textContent = "⬇ Descargar " + nombre + "." + ext + " (" + (blob.size / 1048576).toFixed(1) + " MB)";
+      zona.appendChild(a);
+    }
     est.textContent = "✓ Video listo. Recuerda: no lleva voz, solo música. Copia el guion y grábalo en TikTok o CapCut.";
     est.className = "estado ok";
+    return { url: url, nombre: nombre, ext: ext, mb: (blob.size / 1048576).toFixed(1) };
   } catch (e){
     est.textContent = "No se pudo exportar: " + e.message;
     est.className = "estado error";
     detenerMusica();
+    return null;
   } finally { $("btn-exportar").disabled = false; }
 }
-function exportarPortada(){
+function exportarPortada(zonaEl){
   if (!spec || !spec.escenas.length){ $("estado-exp").textContent = "Primero genera el guion."; return; }
   const off = document.createElement("canvas"); off.width = W; off.height = H;
   const oc = off.getContext("2d");
@@ -1852,7 +1983,7 @@ function exportarPortada(){
     const url = URL.createObjectURL(b);
     const a = document.createElement("a");
     a.href = url; a.download = "portada.png"; a.className = "boton secundario"; a.textContent = "⬇ Descargar portada.png";
-    const zona = $("zona-descarga"); zona.innerHTML = ""; zona.appendChild(a);
+    const zona = zonaEl || $("zona-descarga"); zona.innerHTML = ""; zona.appendChild(a);
   }, "image/png");
 }
 function guionTexto(){
@@ -1866,14 +1997,15 @@ function guionTexto(){
   });
   return lineas.join("\n");
 }
-async function copiarGuion(){
+async function copiarGuion(estadoEl){
+  const est = estadoEl || $("estado-exp");
   const txt = guionTexto();
-  if (!txt){ $("estado-exp").textContent = "No hay guion todavía."; return; }
-  try { await navigator.clipboard.writeText(txt); $("estado-exp").textContent = "✓ Guion copiado al portapapeles."; $("estado-exp").className = "estado ok"; }
+  if (!txt){ est.textContent = "No hay guion todavía."; return; }
+  try { await navigator.clipboard.writeText(txt); est.textContent = "✓ Guion copiado al portapapeles."; est.className = "estado ok"; }
   catch (e){
     const ta = document.createElement("textarea"); ta.value = txt; document.body.appendChild(ta);
     ta.select(); document.execCommand("copy"); ta.remove();
-    $("estado-exp").textContent = "✓ Guion copiado al portapapeles."; $("estado-exp").className = "estado ok";
+    est.textContent = "✓ Guion copiado al portapapeles."; est.className = "estado ok";
   }
 }
 
@@ -1897,6 +2029,11 @@ $("btn-reiniciar").onclick = () => { reiniciarVista(); dibujarFotograma(0); };
 $("btn-exportar").onclick = exportarVideo;
 $("btn-portada").onclick = exportarPortada;
 $("btn-guion").onclick = copiarGuion;
+$("btn-rapido").onclick = crearVideoRapido;
+$("btn-avanzado").onclick = () => { $("modo-avanzado").classList.remove("oculto"); $("btn-avanzado").classList.add("oculto"); };
+$("btn-volver-rapido").onclick = () => { $("modo-avanzado").classList.add("oculto"); $("btn-avanzado").classList.remove("oculto"); };
+$("btn-portada-rapido").onclick = () => exportarPortada($("zona-rapido"));
+$("btn-guion-rapido").onclick = () => copiarGuion($("estado-rapido"));
 $("barra").onclick = e => {
   if (!spec || !spec.escenas.length) return;
   const r = $("barra").getBoundingClientRect();
