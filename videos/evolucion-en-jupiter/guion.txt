@@ -1,0 +1,52 @@
+# Guion — «Evolución en Júpiter» (video en mp4, 720x1280, 9:16)
+# Estilo: animación 2D tipo cartoon como el video de @aprendiz.financiero
+# (fondo blanco con mancha verde menta, rótulos enormes en letra manuscrita
+# negra en mayúsculas, un solo personaje cartoon, animación lenta, una sola
+# voz en off masculina tranquila, sin música).
+# Voz: Helio (avocado_v2:MAI_03), velocidad 95, idioma es.
+# Duración total objetivo: 60 a 75 segundos (manda la narración).
+# Contenido: solo los datos del guion dado. Lo hipotético va marcado como
+# hipotético («imaginaron», «si la vida existiera», «según los científicos»).
+# No se afirma que haya vida en Júpiter ni en Europa. No se añadieron cifras
+# de temperatura, presión o tamaño.
+#
+# Estructura: gancho → gigante de gas → problema → vida flotando → Europa → cierre.
+
+## Escena 1 — GANCHO
+Rótulo: ¿VIDA EN JÚPITER?
+Narración: ¿Podría evolucionar la vida en Júpiter? Es el planeta más grande del sistema solar, pero no tiene suelo donde pararse.
+Visual: planeta Júpiter con bandas y el personaje mirándolo con telescopio.
+
+## Escena 2 — UN GIGANTE DE GAS
+Rótulo: UN GIGANTE DE GAS
+Narración: Júpiter es un gigante de gas. No tiene superficie sólida: su atmósfera es hidrógeno y helio, con tormentas enormes como la Gran Mancha Roja y presiones aplastantes en el interior.
+Visual: Júpiter con bandas y la Gran Mancha Roja.
+
+## Escena 3 — EL PROBLEMA PARA LA VIDA
+Rótulo: EL PROBLEMA PARA LA VIDA
+Narración: Para la vida, el problema es enorme: no hay suelo donde apoyarse, la radiación es intensa y hay capas muy frías y otras muy calientes.
+Visual: personaje con paraguas o escudo bajo rayos de radiación, con un termómetro frío y otro caliente.
+
+## Escena 4 — VIDA FLOTANDO
+Rótulo: VIDA FLOTANDO
+Narración: En 1976, Carl Sagan y Edwin Salpeter imaginaron una solución: criaturas hipotéticas que vivirían flotando en las nubes. Los flotadores se alimentarían de la química de la atmósfera, y los cazadores se comerían a los flotadores. Una evolución posible solo en el aire.
+Visual: flotadores (criaturas globo) y un cazador entre nubes.
+
+## Escena 5 — EUROPA, LA LUNA
+Rótulo: EUROPA, LA LUNA
+Narración: Pero el lugar más prometedor para buscar vida en el sistema de Júpiter no es el planeta, sino su luna Europa, que, según los científicos, esconde un océano de agua líquida bajo el hielo.
+Visual: luna Europa con grietas de hielo y océano debajo.
+
+## Escena 6 — CIERRE
+Rótulo: ADAPTARSE PARA VIVIR
+Narración: La evolución se adapta al ambiente que encuentra. En Júpiter, si la vida existiera, tendría que aprender a vivir flotando.
+Visual: personaje flotando junto a un flotador, con estrellas.
+
+## Tiempos (medidos por ffprobe, voz Helio, velocidad 95)
+# Escena 1: narración 6.816 s, escena 7.62 s (inicio 0.00)
+# Escena 2: narración 11.784 s, escena 12.58 s (inicio 7.62)
+# Escena 3: narración 9.216 s, escena 10.02 s (inicio 20.20)
+# Escena 4: narración 18.360 s, escena 19.16 s (inicio 30.22)
+# Escena 5: narración 11.064 s, escena 11.86 s (inicio 49.38)
+# Escena 6: narración 7.920 s, escena 8.72 s (inicio 61.24)
+# Duración total del video: 69.93 s (ffprobe), 720x1280, 30 fps, H.264 + AAC.

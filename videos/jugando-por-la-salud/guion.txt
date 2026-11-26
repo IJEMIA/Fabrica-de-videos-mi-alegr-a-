@@ -1,0 +1,62 @@
+# Guion — «Jugando por la salud» (video en mp4, 720x1280, 9:16)
+# Estilo: animación 2D tipo cartoon como el video de @aprendiz.financiero
+# (fondo blanco con mancha verde menta, rótulos enormes en letra manuscrita
+# negra en mayúsculas, un solo personaje cartoon, animación lenta, una sola
+# voz en off tranquila, sin música).
+# Voz: Helio (avocado_v2:MAI_03), velocidad 95, idioma es.
+# Duración total objetivo: 60 a 90 segundos (manda la narración).
+# Los datos del proyecto son los dados por el usuario (solo se corrigió
+# la ortografía: jóvenes, fútbol, básquet, canchas).
+# No se inventaron cifras, fechas, lugares ni nombres.
+#
+# Estructura: gancho → misión → visión → objetivo → resultado →
+# actividades → recursos → cierre.
+
+## Escena 1 — GANCHO
+Rótulo: ¿JUGANDO POR LA SALUD?
+Narración: ¿Te imaginas una colonia donde los jóvenes tienen dónde jugar, con quién jugar y alguien que los acompañe?
+Visual: personaje preocupado mirando una cancha vacía.
+
+## Escena 2 — MISIÓN
+Rótulo: NUESTRA MISIÓN
+Narración: Nuestra misión es ser una colonia donde los jóvenes tienen actividades recreativas y acompañamiento de la comunidad.
+Visual: personaje con balón de fútbol y jóvenes jugando.
+
+## Escena 3 — VISIÓN
+Rótulo: NUESTRA VISIÓN
+Narración: Queremos que la Ciudad de México sea reconocida como una zona donde los jóvenes pueden recrearse sanamente.
+Visual: mapa/ciudad con canchas y un corazón.
+
+## Escena 4 — OBJETIVO
+Rótulo: NUESTRO OBJETIVO
+Narración: Nuestro objetivo es tener torneos de fútbol y básquet una vez a la semana, equipos deportivos con instructores gratuitos y pláticas de salud.
+Visual: íconos planos: balón de fútbol, balón de básquet, silbato de entrenador, corazón de salud.
+
+## Escena 5 — RESULTADO
+Rótulo: MÁS JÓVENES EN EL DEPORTE
+Narración: Con ello, esperamos que más del cincuenta por ciento de los jóvenes estén inscritos en un deporte y con seguimiento a las pláticas de salud.
+Visual: personaje sonriendo con jóvenes en equipo y una palomita.
+
+## Escena 6 — ACTIVIDADES
+Rótulo: ¿CÓMO LO HACEMOS?
+Narración: Para lograrlo, platicamos con los vecinos para que sean los entrenadores, buscamos espacios seguros y limpiamos las canchas.
+Visual: lista que aparece punto por punto: vecinos entrenadores, espacios seguros, limpiar las canchas.
+
+## Escena 7 — RECURSOS
+Rótulo: NUESTROS RECURSOS
+Narración: Contamos con un presupuesto de mil pesos y el apoyo de la comunidad.
+Visual: bolsa de dinero con $1,000 y un grupo de vecinos/comunidad.
+
+## Escena 8 — CIERRE
+Rótulo: ¡JUGANDO POR LA SALUD!
+Narración: Jugando por la salud, con deporte, pláticas y comunidad.
+Visual: personaje sonriendo con pulgar arriba junto a un balón.
+
+## Datos del proyecto (usuario)
+- Tema: Jugando por la salud
+- Misión: Ser una colonia donde los jóvenes tienen actividades recreativas y acompañamiento de la comunidad.
+- Visión: Que la Ciudad de México sea reconocida como una zona donde los jóvenes pueden recrearse sanamente.
+- Objetivo: Tener torneos de fútbol y básquet una vez a la semana; tener equipos deportivos con instructores gratuitos; dar pláticas de salud.
+- Resultado: Más del 50% de los jóvenes inscritos en un deporte y con seguimiento a las pláticas de salud.
+- Actividades: Platicar con los vecinos para que sean los entrenadores, buscar espacios seguros, limpiar las canchas.
+- Recursos: Un presupuesto de 1000 pesos y el apoyo de la comunidad.

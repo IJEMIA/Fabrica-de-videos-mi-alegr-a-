@@ -1,0 +1,66 @@
+# Guion — «Iluminando tu futuro» (video en mp4, 720x1280, 9:16)
+# Estilo: animación 2D tipo cartoon como el video de @aprendiz.financiero
+# (fondo blanco con mancha verde menta, rótulos enormes en letra manuscrita
+# negra en mayúsculas, un solo personaje cartoon, animación lenta, una sola
+# voz en off masculina tranquila, sin música).
+# Voz: Helio (avocado_v2:MAI_03), velocidad 95, idioma es.
+# Duración total objetivo: 60 a 90 segundos (manda la narración).
+# Los datos del proyecto son los dados por el usuario (solo se corrigió
+# la ortografía: lámparas, vigilantes, sustentables, disponible, voluntarias).
+# No se inventaron cifras, fechas ni nombres.
+#
+# Estructura: gancho → misión → visión → objetivo → resultado →
+# actividades/productos/verificación/indicadores → recursos → cierre.
+
+## Escena 1 — GANCHO
+Rótulo: ¿ILUMINANDO TU FUTURO?
+Narración: ¿Caminarías tranquilo por tu colonia de noche? En la segunda sección de Tlatelolco, muchas calles se quedan a oscuras cuando cae la tarde.
+Visual: personaje preocupado de noche, una lámpara apagada; al final de la escena la lámpara se enciende.
+
+## Escena 2 — MISIÓN
+Rótulo: NUESTRA MISIÓN
+Narración: Nuestra misión es dotar de lámparas ahorradoras de luz y de un sistema de vigilancia a la segunda sección de Tlatelolco.
+Visual: personaje con una lámpara ahorradora en la mano y una cámara de vigilancia.
+
+## Escena 3 — VISIÓN
+Rótulo: NUESTRA VISIÓN
+Narración: Queremos que la alcaldía Cuauhtémoc sea una de las más seguras y sustentables, usando lámparas recicladas y de bajo consumo de energía.
+Visual: mapa de la alcaldía con lámparas verdes y una hoja (reciclaje).
+
+## Escena 4 — OBJETIVO
+Rótulo: NUESTRO OBJETIVO
+Narración: Nuestro objetivo es colocar cincuenta nuevas lámparas y cuatro vigilantes en la zona.
+Visual: íconos planos: lámpara con el número 50 y vigilante/cámara con el número 4.
+
+## Escena 5 — RESULTADO
+Rótulo: MENOS INSEGURIDAD
+Narración: Con ello, esperamos disminuir la inseguridad en la zona.
+Visual: personaje caminando tranquilo de noche bajo una lámpara encendida, con una palomita.
+
+## Escena 6 — ACTIVIDADES, PRODUCTOS, VERIFICACIÓN E INDICADORES
+Rótulo: ¿CÓMO LO HACEMOS?
+Narración: Para lograrlo, revisamos el presupuesto disponible y el costo de las lámparas, elegimos la zona de instalación, instalamos y revisamos. Nuestros productos son las cincuenta lámparas instaladas y el sistema de vigilancia. Verificamos el avance con la revisión de la zona y el conteo de las lámparas, y medimos el resultado dando seguimiento a la inseguridad en la zona.
+Visual: lista de verificación que aparece punto por punto: presupuesto, costo, zona, instalación, revisión.
+
+## Escena 7 — RECURSOS
+Rótulo: NUESTROS RECURSOS
+Narración: Contamos con cincuenta mil pesos y cinco personas voluntarias.
+Visual: bolsa de dinero con $50,000 y un grupo de cinco voluntarios.
+
+## Escena 8 — CIERRE
+Rótulo: ¡SÚMATE A NOSOTROS!
+Narración: Contamos contigo para seguir avanzando. Súmate a nosotros.
+Visual: personaje sonriendo con el pulgar arriba, junto a una lámpara encendida.
+
+## Datos del proyecto (usuario)
+- Tema: Iluminando tu futuro
+- Misión: Dotar de lámparas ahorradoras de luz y un sistema de vigilancia para la segunda sección de Tlatelolco.
+- Visión: Volver a la alcaldía Cuauhtémoc una de las más seguras y sustentables al usar lámparas recicladas y de bajo consumo de energía.
+- Objetivo: Colocar 50 nuevas lámparas y 4 vigilantes de la zona.
+- Resultado: con ello se espera disminuir la inseguridad.
+- Actividades: presupuesto disponible, costo de lámparas, zona de instalación, instalación y revisión.
+- Recursos: 50,000 pesos y 5 personas voluntarias.
+- Cierre: Contamos contigo para seguir avanzando, súmate a nosotros.
+- Productos: las 50 lámparas instaladas y el sistema de vigilancia.
+- Medios de verificación: revisión de la zona y conteo de lámparas instaladas.
+- Indicadores: seguimiento de la inseguridad en la zona.

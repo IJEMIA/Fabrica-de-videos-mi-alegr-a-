@@ -1,0 +1,10 @@
+# La clave de Groq y cualquier secreto local: NUNCA se suben al repo.
+.env
+# Archivos generados por la app y por los renders.
+salidas/
+.trabajo-*/
+*.mp4
+*.mp3
+# Python
+__pycache__/
+*.pyc

@@ -1,0 +1,10 @@
+# Dependencias de la Fábrica de videos Mi Alegría
+# Instalar con: pip install -r requirements.txt
+# El renderizado además necesita ffmpeg instalado en el sistema
+# (sudo apt install ffmpeg  /  brew install ffmpeg).
+groq
+gradio
+edge-tts
+pillow
+numpy
+python-dotenv

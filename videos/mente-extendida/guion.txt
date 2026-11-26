@@ -1,0 +1,76 @@
+GUION — LA MENTE EXTENDIDA (video vertical 9:16, 57.0 s)
+Tema: la mente extendida (Andy Clark y David Chalmers, 1998)
+Formato: estilo Alebrigma/TikTok — fondo morado oscuro con estrellas, portada con
+rueda de 6 segmentos y cerebro rosa, tarjetas burbuja bicolores, subtítulos
+blancos quemados, narración en español (voz Helio, velocidad 108) + música
+instrumental original (pads C–Am–F–G, ~19 dB bajo los picos de voz).
+
+00:00 – 04:50  PORTADA
+  Texto en pantalla: LA MENTE EXTENDIDA (letras de colores)
+  Narración (entra a los 0.8 s): «¿Sabías que tu mente no termina en tu cabeza?»
+
+04:50 – 08:17  INTRO 1 — 🧠
+  «La teoría de la mente extendida dice que pensar no ocurre solo dentro del cerebro.»
+
+08:17 – 12:33  INTRO 2 — 👥
+  «La propusieron los filósofos Andy Clark y David Chalmers en 1998.»
+
+12:33 – 15:70  INTRO 3 — 🛠️
+  «Según ellos, las herramientas que usamos pueden ser parte de nuestra mente.»
+
+15:70 – 18:70  INTRO 4 — ✨
+  «Estos son algunos ejemplos de la mente extendida:»
+
+18:70 – 19:20  FUNDIDO A NEGRO (0.5 s)
+
+19:20 – 21:40  TÍTULO 1 — MEMORIA / EXTERNA (verde y rosa) 📓
+21:40 – 25:40  DEFINICIÓN 1 — «Otto apunta todo en su libreta y la consulta
+  como si fuera su propia memoria.» Ejemplo en pantalla: Otto y su cuaderno.
+  Narración: «Memoria externa. Otto apunta todo en su libreta y la consulta
+  como si fuera su propia memoria.»
+
+25:40 – 27:60  TÍTULO 2 — TELÉFONO / INTELIGENTE (turquesa y naranja) 📱
+27:60 – 32:00  DEFINICIÓN 2 — «Guardamos contactos, fotos y rutas en el celular
+  en vez de memorizarlos.» Ejemplo: Tu celular.
+  Narración: «Teléfono inteligente. Guardamos contactos, fotos y rutas en el
+  celular en vez de memorizarlos.»
+
+32:00 – 34:20  TÍTULO 3 — LA / CALCULADORA (verde y amarillo) 🧮
+34:20 – 38:20  DEFINICIÓN 3 — «Hacer cuentas con calculadora es pensar con una
+  herramienta en la mano.» Ejemplo: La calculadora.
+  Narración: «La calculadora. Hacer cuentas con calculadora es pensar con una
+  herramienta en la mano.»
+
+38:20 – 40:40  TÍTULO 4 — LOS / MAPAS (azul y amarillo) 🗺️
+40:40 – 44:40  DEFINICIÓN 4 — «Un mapa nos guía sin tener que aprender el camino
+  de memoria.» Ejemplo: El mapa.
+  Narración: «Los mapas. Un mapa nos guía sin tener que aprender el camino
+  de memoria.»
+
+44:40 – 46:60  TÍTULO 5 — LA / ESCRITURA (rojo y amarillo) ✍️
+46:60 – 50:60  DEFINICIÓN 5 — «Escribir ordena las ideas que la cabeza sola no
+  puede retener.» Ejemplo: Escribir a mano.
+  Narración: «La escritura. Escribir ordena las ideas que la cabeza sola no
+  puede retener.»
+
+50:60 – 52:80  TÍTULO 6 — TRABAJO / EN EQUIPO (morado y rosa) 👥
+52:80 – 56:80  DEFINICIÓN 6 — «Pensar con otros también extiende la mente más
+  allá de una sola cabeza.» Ejemplo: El equipo.
+  Narración: «Trabajo en equipo. Pensar con otros también extiende la mente
+  más allá de una sola cabeza.»
+
+FIN — 57.0 s totales (el video cierra de forma abrupta en la última definición,
+como el video de referencia; vuelve en bucle a la portada en TikTok).
+
+Archivos:
+- Video: ~/workspace/your_files/mente-extendida/mente-extendida-1-minuto.mp4
+- Versión anterior (solo zoom): ~/workspace/your_files/mente-extendida/mente-extendida-1-minuto-v1.mp4
+- Audios de narración por segmento: ~/workspace/your_files/mente-extendida/audio/
+- Escenas: /tmp/mente/escenas/ (no se conservan en el entregable)
+
+v2 (2026-11-25): imágenes ANIMADAS fotograma a fotograma (15 fps render, 30 fps
+final) — estrellas parpadeantes, rueda girando, cerebro flotante con parpadeo y
+brazos en movimiento, emojis flotando con entrada, títulos con pop, textos con
+fundido/deslizamiento, impulso de zoom al inicio de cada escena. Mismo audio
+(narración + música, reutilizado del v1), mismo contenido y misma duración
+(57.0 s). Script de render: /tmp/mente2/render_v2.py.
